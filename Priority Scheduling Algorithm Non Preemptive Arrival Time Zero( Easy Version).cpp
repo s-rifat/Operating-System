@@ -42,6 +42,7 @@ int main()
     cout<<"\nAverage wait: "<<totalwait/n<<" Average turn: "<<totalturn/n<<endl;
     return 0;
 }
+
 /*
 3
 p1 0 5 0
