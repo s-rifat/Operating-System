@@ -29,14 +29,11 @@ int main()
             if(arr[i].cputime!=0)
             {
                 v.push_back(arr[i].process);
-
                 spend= min(arr[i].cputime,timequantum);
                 arr[i].cputime -= spend;
                 arr[i].waitingtime+=time-arr[i].arrivaltime;
-
                 time+=spend;
                 arr[i].arrivaltime = time;
-
                 if(arr[i].cputime==0)
                     died++;
             }
