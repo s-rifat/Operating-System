@@ -95,6 +95,7 @@ int main()
     cout<<"Average waiting time: "<<totalwait/n<<"\nAverage turnaround time: "<<totalturn/n<<endl;
     return 0;
 }
+
 /*
 4
 p1 4 5
