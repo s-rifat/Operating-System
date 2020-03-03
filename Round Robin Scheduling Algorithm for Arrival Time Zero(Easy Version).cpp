@@ -4,7 +4,7 @@ using namespace std;
 struct node
 {
     string process;
-    double cputime,initialcputime,arrivaltime,waitingtime,turnaroundtime;
+    double cputime,arrivaltime,waitingtime,turnaroundtime;
 } arr[50];
 int main()
 {
@@ -16,7 +16,7 @@ int main()
     for(int i=0;i<n;i++)
     {
         cin>>arr[i].process>>arr[i].arrivaltime>>arr[i].cputime;
-        arr[i].initialcputime = arr[i].cputime;
+        arr[i].turnaroundtime = arr[i].cputime;
     }
     cin>>timequantum;
     ///input done
@@ -42,8 +42,8 @@ int main()
     ///calculating turning and waiting
     for(int i=0;i<n;i++)
     {
+        arr[i].turnaroundtime+=arr[i].waitingtime;
         totalwait+=arr[i].waitingtime;
-        arr[i].turnaroundtime+=arr[i].waitingtime+arr[i].initialcputime;
         totalturn+=arr[i].turnaroundtime;
     }
     ///printing..............
