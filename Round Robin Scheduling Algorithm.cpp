@@ -6,6 +6,11 @@ struct node
     double cputime,ct,arrivaltime,At,waitingtime,turnaroundtime;
     int id,index,pushed;
 } arr[50];
+struct node2
+{
+    string process;
+    int starttime,finishtime;
+};
 bool compare(node a, node b)
 {
     if(a.arrivaltime==b.arrivaltime)
@@ -16,7 +21,8 @@ int main()
 {
     int n;
     double timequantum,time,spend, totalwait = 0, totalturn = 0;
-    vector<string>v;
+    vector<node2>v;
+    node2 temp;
     int current;
     queue<int>q;
     cin>>n;
@@ -41,16 +47,20 @@ int main()
     {
         current = q.front();
         q.pop();
-        v.push_back(arr[current].process);
         arr[current].pushed = 0;
 
         spend= min(arr[current].cputime,timequantum);
         arr[current].cputime -= spend;
 
         time = max(arr[current].arrivaltime,time);
+        temp.starttime = time;
         arr[current].waitingtime+=time-arr[current].At;
         time+=spend;
+        temp.finishtime = time;
         arr[current].At = time;
+
+        temp.process = arr[current].process;
+        v.push_back(temp);
 
         if(arr[current].cputime==0)
         {
@@ -84,9 +94,10 @@ int main()
         totalwait+= arr[i].waitingtime;
         totalturn+= arr[i].turnaroundtime;
     }
+    cout<<"chart:"<<endl;
     for(int i=0;i<v.size();i++)
     {
-       cout<<v[i]<<" ";
+       cout<<v[i].starttime<<" "<<v[i].process<<" "<<v[i].finishtime<<endl;
     }
     cout<<endl;
     for(int i=0;i<n;i++)
@@ -104,6 +115,7 @@ p3 6 9
 p4 10 9
 3
 */
+
 
 
 
