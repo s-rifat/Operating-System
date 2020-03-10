@@ -84,15 +84,20 @@ int main()
     return 0;
 }
 /*
-7
-1 2 3 4 5 6 7
-8
-1 2
-2 3
-3 1
-2 4
-4 5
-5 6
-6 7
-7 5
+13
+R A C S D T B E F U V W G
+13
+R A
+A S
+C S
+F S
+W F
+D S
+D T
+B T
+T E
+E V
+V G
+G U
+U D
 */
