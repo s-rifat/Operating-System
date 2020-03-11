@@ -31,7 +31,7 @@ void DFS(int u)
             }
             cout<<endl;
             ///recovery from a deadlock
-            vector<int> v2;
+           /* vector<int> v2;
             for(int i=0;i<V[u].size();i++)
             {
                 if(V[u][i]!=v)
@@ -41,7 +41,7 @@ void DFS(int u)
             for(int i=0;i<v2.size();i++)
             {
                 V[u].push_back(v2[i]);
-            }
+            }*/
         }
     }
     d.pop_back();
@@ -74,13 +74,13 @@ int main()
         if(color[i]==0)
             DFS(i);
     ///checking recovery
-    cout<<"checking 2nd time: "<<endl;
+    /*cout<<"checking 2nd time: "<<endl;
     d.clear();
     for(int i=0;i<n;i++)
         color[i] = 0;
     for(int i=0;i<n;i++)
         if(color[i]==0)
-            DFS(i);
+            DFS(i);*/
     return 0;
 }
 /*
