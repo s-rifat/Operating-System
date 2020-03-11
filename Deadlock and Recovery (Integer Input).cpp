@@ -3,7 +3,7 @@ using namespace std;
 vector<int> V[100],d;
 int color[100],cnt = 0;
 stack<int>s;
-void DFS(int u)
+void DeadLockDetect(int u)
 {
     color[u] = 1;
     d.push_back(u);
@@ -11,7 +11,7 @@ void DFS(int u)
     {
         int v = V[u][i];
         if(color[v]==0)
-            DFS(v);
+            DeadLockDetect(v);
         else if ( color[v]==1)
         {   cnt++;
             for(int i= d.size()-1;i>=0;i--)
@@ -27,7 +27,21 @@ void DFS(int u)
                 s.pop();
             }
             cout<<endl;
-            ///recovery from deadlock
+        }
+    }
+    d.pop_back();
+    color[u] = 2;
+}
+void Recover(int u)
+{
+    color[u] = 1;
+    for(int i=0;i<V[u].size();i++)
+    {
+        int v = V[u][i];
+        if(color[v]==0)
+            Recover(v);
+        else if ( color[v]==1)
+        {
             vector<int> v2;
             for(int i=0;i<V[u].size();i++)
                 if(V[u][i]!=v)
@@ -37,7 +51,6 @@ void DFS(int u)
                 V[u].push_back(v2[i]);
         }
     }
-    d.pop_back();
     color[u] = 2;
 }
 int main()
@@ -51,16 +64,23 @@ int main()
     }
     for(int i=1;i<=n;i++)
         if(color[i]==0)
-            DFS(i);
-   ///checking recovery
-    d.clear();
-    cnt = 0;
-    for(int i=1;i<=n;i++)
+            DeadLockDetect(i);
+  ///Recovering
+   for(int i=1;i<=n;i++)
         color[i] = 0;
-    cout<<"checking 2nd time: "<<endl;
     for(int i=1;i<=n;i++)
         if(color[i]==0)
-            DFS(i);
+            Recover(i);
+    ///checking again
+    cnt = 0;
+    d.clear();
+    for(int i=1;i<=n;i++)
+    {
+        color[i] = 0;
+    }
+    for(int i=1;i<=n;i++)
+        if(color[i]==0)
+            DeadLockDetect(i);
     return 0;
 }
 /*
@@ -75,4 +95,3 @@ int main()
 6 7
 7 5
 */
-
